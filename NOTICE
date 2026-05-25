@@ -1,0 +1,10 @@
+Deputy
+Copyright 2026 Someone Kong
+
+This product is licensed under the Apache License, Version 2.0 (see the LICENSE file).
+
+This product bundles third-party components in src/web/static/vendor/, each distributed
+under its own license:
+  - marked (MIT License)
+  - DOMPurify (Apache-2.0 / MPL-2.0, at your option)
+Their original license notices are retained in those files.

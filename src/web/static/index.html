@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Deputy Web GUI</title>
+
+    <!-- ESM importmap: markdown rendering vendors are served locally from /vendor/ (no build / no CDN) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "marked": "/vendor/marked.esm.js",
+          "dompurify": "/vendor/purify.es.mjs"
+        }
+      }
+    </script>
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <aside id="sidebar">
+        <div class="sidebar-head">
+          <h1 data-i18n="sidebar.tasks">Tasks</h1>
+          <div class="sidebar-head-actions">
+            <button id="lang-toggle" class="lang-toggle" type="button" data-i18n-attr="title:lang.toggle_title"></button>
+            <button id="new-task-btn" type="button" data-i18n="sidebar.new">+ New</button>
+          </div>
+        </div>
+        <ul id="task-list"></ul>
+      </aside>
+      <main id="main">
+        <section id="detail-view" hidden>
+          <header id="detail-header">
+            <h2 id="detail-title"></h2>
+            <span id="detail-taskid" class="task-id" data-i18n-attr="title:detail.taskid_copy"></span>
+            <span id="stage-chip" class="stage-chip"></span>
+            <span id="host-status" class="badge">—</span>
+            <button id="delete-btn" class="btn btn-danger" type="button" data-i18n="detail.delete">Delete</button>
+          </header>
+          <div id="status-banner" class="banner"></div>
+          <nav id="tabs">
+            <button data-tab="conversation" class="active" data-i18n="nav.conversation">Conversation</button>
+            <button data-tab="events" data-i18n="nav.events">Events</button>
+            <button data-tab="meta">Meta</button>
+            <button data-tab="worker">Worker</button>
+            <button data-tab="watcher">Watcher</button>
+            <button data-tab="reviewer">Reviewer</button>
+            <button data-tab="files" data-i18n="nav.files">Files</button>
+            <button data-tab="hostlog">host.log</button>
+          </nav>
+          <div id="tab-body"></div>
+          <div id="action-panel"></div>
+        </section>
+        <section id="new-task-view" hidden>
+          <header class="nt-header">
+            <button id="nt-back" class="nt-back" type="button" data-i18n="nt.back">← Cancel</button>
+            <h2 data-i18n="nt.title">New Task</h2>
+          </header>
+          <div class="nt-form">
+            <!-- Task description -->
+            <div class="nt-field">
+              <label><span data-i18n="nt.raw_label">Task description</span> <span class="nt-req">*</span></label>
+              <textarea
+                id="raw-task"
+                rows="10"
+                data-i18n-attr="placeholder:nt.raw_placeholder"
+              ></textarea>
+              <div id="nt-charcount" class="nt-hint"></div>
+            </div>
+
+            <!-- Attachments -->
+            <div class="nt-field">
+              <label data-i18n="nt.attach_label">Attachments (optional, single file ≤ 500 MB)</label>
+              <div id="nt-dropzone" class="nt-dropzone">
+                <div class="nt-dz-main" data-i18n="nt.dz_main">📎 Drop a file here, or click to select</div>
+                <div class="nt-dz-sub" data-i18n="nt.dz_sub">Multiple files supported; attachments are created with the task</div>
+                <input id="new-files" type="file" multiple hidden />
+              </div>
+              <div id="nt-filelist" class="nt-filelist"></div>
+            </div>
+
+            <!-- Advanced options -->
+            <div class="nt-field">
+              <button id="nt-adv-toggle" class="nt-adv-toggle" type="button"></button>
+              <div id="nt-adv" class="nt-adv" hidden>
+                <label class="nt-adv-label" data-i18n="nt.taskid_label">Custom task_id (leave empty to auto-generate)</label>
+                <input id="new-task-id" type="text" data-i18n-attr="placeholder:nt.taskid_placeholder" />
+
+                <label class="nt-adv-label nt-roles-title" data-i18n="nt.roles_title">Execution plan (provider per agent role)</label>
+                <div id="nt-roles-grid" class="nt-roles-grid"></div>
+                <div class="nt-hint" data-i18n="nt.roles_hint">Unset = inherit project config, falling back to Claude; you may override provider per role. Model is currently fixed.</div>
+              </div>
+            </div>
+
+            <!-- Upload progress -->
+            <div id="nt-progress" class="nt-progress" hidden>
+              <div id="nt-progress-label" class="nt-hint"></div>
+              <div class="nt-progress-track"><div id="nt-progress-fill" class="nt-progress-fill"></div></div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="nt-actions">
+              <button id="nt-cancel" class="btn" type="button" data-i18n="nt.cancel">Cancel</button>
+              <button id="submit-btn" class="btn btn-primary" type="button" data-i18n="nt.submit">Submit & start</button>
+            </div>
+          </div>
+        </section>
+        <section id="empty-view">
+          <p class="empty-hint" data-i18n="empty.hint">Select a task on the left, or create a new one.</p>
+        </section>
+      </main>
+    </div>
+    <div id="toast"></div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
