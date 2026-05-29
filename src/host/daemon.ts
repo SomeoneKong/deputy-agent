@@ -311,12 +311,12 @@ function buildRoleResolver(config: DaemonConfig, fallbackIsolation: SessionReque
 }
 
 /**
- * Production default model config: a single model for all roles, `claude-opus-4-7` +
+ * Production default model config: a single model for all roles, `claude-opus-4-8` +
  * `thinking_effort=xhigh` (a single effort value for all roles); summary=summarized makes the
  * server return a reasoning summary. Tests use `defaultModel()` (stub-model) instead of this;
  * production passes these two constants explicitly via `DaemonConfig.model` + `DaemonConfig.thinking`.
  */
-export const PRODUCTION_MODEL: SessionRequest["model"] = { provider: "claude", modelId: "claude-opus-4-7" };
+export const PRODUCTION_MODEL: SessionRequest["model"] = { provider: "claude", modelId: "claude-opus-4-8" };
 export const PRODUCTION_THINKING: SessionRequest["thinking"] = { level: "xhigh", summary: "summarized" };
 
 /**

@@ -306,7 +306,7 @@ Example:
   "codexHome": ".secrets/codex",
   "roles": {
     "worker": { "provider": "codex", "modelId": "gpt-5-codex" },
-    "reviewer": { "provider": "claude", "modelId": "claude-opus-4-7" }
+    "reviewer": { "provider": "claude", "modelId": "claude-opus-4-8" }
   }
 }
 ```

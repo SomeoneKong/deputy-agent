@@ -40,7 +40,7 @@ npm run check       # typecheck + build
 {
   "claudeConfigDir": ".claude",
   "roles": {
-    "meta":   { "provider": "claude", "modelId": "claude-opus-4-7" },
+    "meta":   { "provider": "claude", "modelId": "claude-opus-4-8" },
     "worker": { "provider": "codex",  "modelId": "gpt-5.5" }
   }
 }
